@@ -28,6 +28,8 @@
         "endOfLine": "auto"
       }
     ],
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "import/extensions": "off",
+    "import/prefer-default-export": "off"
   }
 }

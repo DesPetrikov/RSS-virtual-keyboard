@@ -36,7 +36,17 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: [stylesHandler, 'css-loader'],
+        use: [
+          stylesHandler,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.s[ac]ss$/i,
