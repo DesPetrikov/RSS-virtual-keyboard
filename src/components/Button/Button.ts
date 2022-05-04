@@ -6,19 +6,19 @@ export class Button {
 
   private content: string;
 
-  private key: string;
+  private code: string;
 
   private image: string;
 
   constructor(
     parent: HTMLElement,
     content: string,
-    key: string,
+    code: string,
     image?: string
   ) {
     this.parent = parent;
     this.content = content;
-    this.key = key;
+    this.code = code;
     this.image = image;
     this.creteButton();
   }
@@ -29,7 +29,7 @@ export class Button {
       styles.button,
       this.parent,
       '',
-      `data-key, ${this.key}`
+      `data-key, ${this.code}`
     );
     button.innerHTML = this.content;
     if (this.image) {

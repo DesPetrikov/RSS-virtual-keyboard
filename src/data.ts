@@ -1,8 +1,12 @@
 import backspaceSvg from './assets/svg/keyboard-delete.svg';
+import capsLockSvg from './assets/svg/keyboard-capslock.svg';
+import enterSvg from './assets/svg/keyboard-return.svg';
+import spaceSvg from './assets/svg/keyboard-space-bar.svg';
+import languageSvg from './assets/svg/language.svg';
 
 type dataType = {
-  ru: { content: string; shift: string };
-  en: { content: string; shift: string };
+  ru: { key: string; shift: string };
+  en: { key: string; shift: string };
   code: string;
   image?: string;
 };
@@ -10,75 +14,332 @@ type dataType = {
 export const data: dataType[][] = [
   [
     {
-      ru: { content: 'ё', shift: 'Ё' },
-      en: { content: '`', shift: '~' },
+      ru: { key: 'ё', shift: 'Ё' },
+      en: { key: '`', shift: '~' },
       code: 'Backquote',
     },
     {
-      ru: { content: '1', shift: '!' },
-      en: { content: '1', shift: '!' },
+      ru: { key: '1', shift: '!' },
+      en: { key: '1', shift: '!' },
       code: 'Digit1',
     },
     {
-      ru: { content: '2', shift: '"' },
-      en: { content: '2', shift: '@' },
+      ru: { key: '2', shift: '"' },
+      en: { key: '2', shift: '@' },
       code: 'Digit2',
     },
     {
-      ru: { content: '3', shift: '№' },
-      en: { content: '3', shift: '#' },
+      ru: { key: '3', shift: '№' },
+      en: { key: '3', shift: '#' },
       code: 'Digit3',
     },
     {
-      ru: { content: '4', shift: ';' },
-      en: { content: '4', shift: '$' },
+      ru: { key: '4', shift: ';' },
+      en: { key: '4', shift: '$' },
       code: 'Digit4',
     },
     {
-      ru: { content: '5', shift: '%' },
-      en: { content: '5', shift: '%' },
+      ru: { key: '5', shift: '%' },
+      en: { key: '5', shift: '%' },
       code: 'Digit5',
     },
     {
-      ru: { content: '6', shift: ':' },
-      en: { content: '6', shift: '^' },
+      ru: { key: '6', shift: ':' },
+      en: { key: '6', shift: '^' },
       code: 'Digit6',
     },
     {
-      ru: { content: '7', shift: '?' },
-      en: { content: '7', shift: '&' },
+      ru: { key: '7', shift: '?' },
+      en: { key: '7', shift: '&' },
       code: 'Digit7',
     },
     {
-      ru: { content: '8', shift: '*' },
-      en: { content: '8', shift: '*' },
+      ru: { key: '8', shift: '*' },
+      en: { key: '8', shift: '*' },
       code: 'Digit8',
     },
     {
-      ru: { content: '9', shift: '(' },
-      en: { content: '9', shift: '(' },
+      ru: { key: '9', shift: '(' },
+      en: { key: '9', shift: '(' },
       code: 'Digit9',
     },
     {
-      ru: { content: '0', shift: ')' },
-      en: { content: '0', shift: ')' },
+      ru: { key: '0', shift: ')' },
+      en: { key: '0', shift: ')' },
       code: 'Digit0',
     },
     {
-      ru: { content: '-', shift: '_' },
-      en: { content: '-', shift: '_' },
+      ru: { key: '-', shift: '_' },
+      en: { key: '-', shift: '_' },
       code: 'Minus',
     },
     {
-      ru: { content: '=', shift: '+' },
-      en: { content: '=', shift: '+' },
+      ru: { key: '=', shift: '+' },
+      en: { key: '=', shift: '+' },
       code: 'Equal',
     },
     {
-      ru: { content: '', shift: '' },
-      en: { content: '', shift: '' },
+      ru: { key: '', shift: '' },
+      en: { key: '', shift: '' },
       code: 'Backspace',
       image: backspaceSvg,
+    },
+  ],
+  [
+    {
+      ru: { key: 'Tab', shift: 'Tab' },
+      en: { key: 'Tab', shift: 'Tab' },
+      code: 'Backquote',
+    },
+    {
+      ru: { key: 'й', shift: 'Й' },
+      en: { key: 'q', shift: 'Q' },
+      code: 'KeyQ',
+    },
+    {
+      ru: { key: 'ц', shift: 'Ц' },
+      en: { key: 'w', shift: 'W' },
+      code: 'KeyW',
+    },
+    {
+      ru: { key: 'у', shift: 'У' },
+      en: { key: 'e', shift: 'E' },
+      code: 'KeyE',
+    },
+    {
+      ru: { key: 'к', shift: 'К' },
+      en: { key: 'r', shift: 'R' },
+      code: 'KeyR',
+    },
+    {
+      ru: { key: 'е', shift: 'Е' },
+      en: { key: 't', shift: 'T' },
+      code: 'KeyT',
+    },
+    {
+      ru: { key: 'н', shift: 'Н' },
+      en: { key: 'y', shift: 'Y' },
+      code: 'KeyY',
+    },
+    {
+      ru: { key: 'г', shift: 'Г' },
+      en: { key: 'u', shift: 'U' },
+      code: 'KeyU',
+    },
+    {
+      ru: { key: 'ш', shift: 'Ш' },
+      en: { key: 'i', shift: 'I' },
+      code: 'KeyI',
+    },
+    {
+      ru: { key: 'щ', shift: 'Щ' },
+      en: { key: 'o', shift: 'O' },
+      code: 'KeyO',
+    },
+    {
+      ru: { key: 'з', shift: 'З' },
+      en: { key: 'p', shift: 'P' },
+      code: 'KeyP',
+    },
+    {
+      ru: { key: 'х', shift: 'Х' },
+      en: { key: '[', shift: '{' },
+      code: 'BracketLeft',
+    },
+    {
+      ru: { key: 'ъ', shift: 'Ъ' },
+      en: { key: ']', shift: '}' },
+      code: 'BracketRight',
+    },
+    {
+      ru: { key: '\\', shift: '/' },
+      en: { key: '\\', shift: '|' },
+      code: 'Backslash',
+    },
+  ],
+  [
+    {
+      ru: { key: '', shift: '' },
+      en: { key: '', shift: '' },
+      code: 'CapsLock',
+      image: capsLockSvg,
+    },
+    {
+      ru: { key: 'ф', shift: 'Ф' },
+      en: { key: 'a', shift: 'A' },
+      code: 'KeyA',
+    },
+    {
+      ru: { key: 'ы', shift: 'Ы' },
+      en: { key: 's', shift: 'S' },
+      code: 'KeyS',
+    },
+    {
+      ru: { key: 'в', shift: 'В' },
+      en: { key: 'd', shift: 'D' },
+      code: 'KeyD',
+    },
+    {
+      ru: { key: 'а', shift: 'А' },
+      en: { key: 'f', shift: 'F' },
+      code: 'KeyF',
+    },
+    {
+      ru: { key: 'п', shift: 'П' },
+      en: { key: 'g', shift: 'G' },
+      code: 'KeyG',
+    },
+    {
+      ru: { key: 'р', shift: 'Р' },
+      en: { key: 'h', shift: 'H' },
+      code: 'KeyH',
+    },
+    {
+      ru: { key: 'о', shift: 'О' },
+      en: { key: 'j', shift: 'J' },
+      code: 'KeyJ',
+    },
+    {
+      ru: { key: 'л', shift: 'Л' },
+      en: { key: 'k', shift: 'K' },
+      code: 'KeyK',
+    },
+    {
+      ru: { key: 'д', shift: 'Д' },
+      en: { key: 'l', shift: 'L' },
+      code: 'KeyL',
+    },
+    {
+      ru: { key: 'ж', shift: 'Ж' },
+      en: { key: ';', shift: ':' },
+      code: 'Semicolon',
+    },
+    {
+      ru: { key: 'э', shift: 'Э' },
+      en: { key: "'", shift: '"' },
+      code: 'Quote',
+    },
+    {
+      ru: { key: '', shift: '' },
+      en: { key: '', shift: '' },
+      code: 'Enter',
+      image: enterSvg,
+    },
+  ],
+  [
+    {
+      ru: { key: 'Shift', shift: 'Shift' },
+      en: { key: 'Shift', shift: 'Shift' },
+      code: 'ShiftLeft',
+    },
+    {
+      ru: { key: 'я', shift: 'Я' },
+      en: { key: 'z', shift: 'Z' },
+      code: 'KeyZ',
+    },
+    {
+      ru: { key: 'ч', shift: 'Ч' },
+      en: { key: 'x', shift: 'X' },
+      code: 'KeyX',
+    },
+    {
+      ru: { key: 'с', shift: 'С' },
+      en: { key: 'c', shift: 'C' },
+      code: 'KeyC',
+    },
+    {
+      ru: { key: 'м', shift: 'М' },
+      en: { key: 'v', shift: 'V' },
+      code: 'KeyV',
+    },
+    {
+      ru: { key: 'и', shift: 'И' },
+      en: { key: 'b', shift: 'B' },
+      code: 'KeyB',
+    },
+    {
+      ru: { key: 'т', shift: 'Т' },
+      en: { key: 'n', shift: 'N' },
+      code: 'KeyN',
+    },
+    {
+      ru: { key: 'ь', shift: 'Ь' },
+      en: { key: 'm', shift: 'M' },
+      code: 'KeyM',
+    },
+    {
+      ru: { key: 'б', shift: 'Б' },
+      en: { key: ',', shift: '<' },
+      code: 'Comma',
+    },
+    {
+      ru: { key: 'ю', shift: 'Ю' },
+      en: { key: '.', shift: '>' },
+      code: 'Period',
+    },
+    {
+      ru: { key: '.', shift: ',' },
+      en: { key: '/', shift: '?' },
+      code: 'Slash',
+    },
+    {
+      ru: { key: 'Shift', shift: 'Shift' },
+      en: { key: 'Shift', shift: 'Shift' },
+      code: 'ShiftRight',
+    },
+    {
+      ru: { key: '▲', shift: '▲' },
+      en: { key: '▲', shift: '▲' },
+      code: 'ArrowUp',
+    },
+  ],
+  [
+    {
+      ru: { key: 'Ctrl', shift: 'Ctrl' },
+      en: { key: 'Ctrl', shift: 'Ctrl' },
+      code: 'ControlLeft',
+    },
+    {
+      ru: { key: 'Alt', shift: 'Alt' },
+      en: { key: 'Alt', shift: 'Alt' },
+      code: 'AltLeft',
+    },
+    {
+      ru: { key: '', shift: '' },
+      en: { key: '', shift: '' },
+      code: 'Space',
+      image: spaceSvg,
+    },
+    {
+      ru: { key: 'Alt', shift: 'Alt' },
+      en: { key: 'Alt', shift: 'Alt' },
+      code: 'AltRight',
+    },
+    {
+      ru: { key: 'Ctrl', shift: 'Ctrl' },
+      en: { key: 'Ctrl', shift: 'Ctrl' },
+      code: 'ControlRight',
+    },
+    {
+      ru: { key: '◄', shift: '◄' },
+      en: { key: '◄', shift: '◄' },
+      code: 'ArrowLeft',
+    },
+    {
+      ru: { key: '▼', shift: '▼' },
+      en: { key: '▼', shift: '▼' },
+      code: 'ArrowDown',
+    },
+    {
+      ru: { key: '►', shift: '►' },
+      en: { key: '►', shift: '►' },
+      code: 'ArrowRight',
+    },
+    {
+      ru: { key: '', shift: '' },
+      en: { key: '', shift: '' },
+      code: 'ChangeLang',
+      image: languageSvg,
     },
   ],
 ];
