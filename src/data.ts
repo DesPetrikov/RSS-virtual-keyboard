@@ -1,6 +1,13 @@
 import backspaceSvg from './assets/svg/keyboard-delete.svg';
 
-const data = [
+type dataType = {
+  ru: { content: string; shift: string };
+  en: { content: string; shift: string };
+  code: string;
+  image?: string;
+};
+
+export const data: dataType[][] = [
   [
     {
       ru: { content: 'ё', shift: 'Ё' },
@@ -68,9 +75,10 @@ const data = [
       code: 'Equal',
     },
     {
-      ru: { content: backspaceSvg, shift: backspaceSvg },
-      en: { content: backspaceSvg, shift: backspaceSvg },
+      ru: { content: '', shift: '' },
+      en: { content: '', shift: '' },
       code: 'Backspace',
+      image: backspaceSvg,
     },
   ],
 ];
