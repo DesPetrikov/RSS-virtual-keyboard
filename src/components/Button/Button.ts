@@ -6,9 +6,11 @@ export class Button {
 
   private content: string;
 
-  private code: string;
+  code: string;
 
   private image: string;
+
+  button: HTMLElement;
 
   constructor(
     parent: HTMLElement,
@@ -24,16 +26,16 @@ export class Button {
   }
 
   creteButton() {
-    const button = createHtml(
+    this.button = createHtml(
       'button',
       styles.button,
       this.parent,
       '',
-      `data-key, ${this.code}`
+      `data-code, ${this.code}`
     );
-    button.innerHTML = this.content;
+    this.button.innerHTML = this.content;
     if (this.image) {
-      button.style.backgroundImage = `url(${this.image})`;
+      this.button.style.backgroundImage = `url(${this.image})`;
     }
   }
 }

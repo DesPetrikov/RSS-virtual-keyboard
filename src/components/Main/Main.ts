@@ -1,10 +1,19 @@
 import createHtml from '../../createHtml';
 import { TextArea } from '../TextArea/TextArea';
 import { Keyboard } from '../Keyboard/Keyboard';
+import { serviceCodes } from '../../data';
 import styles from './Main.module.css';
+import buttonStyles from '../Button/Button.module.css';
+import { Button } from '../Button/Button';
 
 export class Main {
   private parent: HTMLElement;
+
+  textArea: TextArea;
+
+  keyboard: Keyboard;
+
+  areaValue: string = '';
 
   constructor(parent: HTMLElement) {
     this.parent = parent;
@@ -13,7 +22,44 @@ export class Main {
 
   createMain() {
     const container = createHtml('main', styles.main, this.parent);
-    const textArea = new TextArea(container);
-    const keyboard = new Keyboard(container);
+    this.textArea = new TextArea(container);
+    this.keyboard = new Keyboard(container);
+
+    this.keyboard.container.addEventListener('click', this.buttonClickHandler);
+    document.addEventListener('keydown', this.keyDownHandler);
   }
+
+  buttonClickHandler = (e: Event) => {
+    if (e.target instanceof HTMLButtonElement) {
+      const dataCode = e.target.dataset.code;
+      if (!serviceCodes.includes(dataCode)) {
+        this.areaValue += e.target.innerText;
+      }
+      this.updateAreaValue();
+    }
+  };
+
+  keyDownHandler = (e: KeyboardEvent) => {
+    e.preventDefault();
+    if (!serviceCodes.includes(e.code)) {
+      this.areaValue += e.key;
+    }
+    this.updateAreaValue();
+
+    const index = this.keyboard.buttonsArr.findIndex(
+      (el) => el.code === e.code
+    );
+    if (index !== -1) {
+      this.keyboard.buttonsArr[index].button.classList.add(buttonStyles.active);
+    }
+  };
+
+  keyUpHandler = () => {
+	  
+  }
+
+  updateAreaValue = () => {
+    const textAreaNode = this.textArea.container as HTMLTextAreaElement;
+    textAreaNode.value = this.areaValue;
+  };
 }

@@ -89,7 +89,7 @@ export const data: dataType[][] = [
     {
       ru: { key: 'Tab', shift: 'Tab' },
       en: { key: 'Tab', shift: 'Tab' },
-      code: 'Backquote',
+      code: 'Tab',
     },
     {
       ru: { key: 'й', shift: 'Й' },
@@ -342,4 +342,23 @@ export const data: dataType[][] = [
       image: languageSvg,
     },
   ],
+];
+
+export const serviceCodes = [
+  'Backspace',
+  'Tab',
+  'CapsLock',
+  'Enter',
+  'ShiftLeft',
+  'ShiftRight',
+  'ArrowUp',
+  'ControlLeft',
+  'AltLeft',
+  'Space',
+  'ControlRight',
+  'AltRight',
+  'ArrowLeft',
+  'ArrowDown',
+  'ArrowRight',
+  'ChangeLang',
 ];

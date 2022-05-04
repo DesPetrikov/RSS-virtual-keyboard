@@ -6,21 +6,27 @@ import styles from './Keyboard.module.css';
 export class Keyboard {
   private parent: HTMLElement;
 
+  container: HTMLElement;
+
+  buttonsArr: Button[] = [];
+
   constructor(parent: HTMLElement) {
     this.parent = parent;
     this.createKeyboard();
   }
 
   createKeyboard() {
-    const container = createHtml('div', styles.keyboard, this.parent);
+    this.container = createHtml('div', styles.keyboard, this.parent);
     data.forEach((row) => {
-      const rowContainer = createHtml('div', styles.row, container);
+      const rowContainer = createHtml('div', styles.row, this.container);
       row.forEach((el) => {
+        let button;
         if (el.image) {
-          const button = new Button(rowContainer, el.en.key, el.code, el.image);
+          button = new Button(rowContainer, el.en.key, el.code, el.image);
         } else {
-          const button = new Button(rowContainer, el.en.key, el.code);
+          button = new Button(rowContainer, el.en.key, el.code);
         }
+        this.buttonsArr.push(button);
       });
     });
   }
