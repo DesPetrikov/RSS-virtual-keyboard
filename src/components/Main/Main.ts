@@ -31,6 +31,7 @@ export class Main {
     );
     this.keyboard.container.addEventListener('mouseup', this.mouseUpHandler);
     document.addEventListener('keydown', this.keyDownHandler);
+    document.addEventListener('keyup', this.keyUpHandler);
   }
 
   mouseDownHandler = (e: Event) => {
@@ -55,17 +56,26 @@ export class Main {
     if (!serviceCodes.includes(e.code)) {
       this.areaValue += e.key;
     }
-    this.updateAreaValue();
-
     const index = this.keyboard.buttonsArr.findIndex(
       (el) => el.data.code === e.code
     );
     if (index !== -1) {
       this.keyboard.buttonsArr[index].button.classList.add(buttonStyles.active);
     }
+    this.updateAreaValue();
   };
 
-  keyUpHandler = () => {};
+  keyUpHandler = (e: KeyboardEvent) => {
+    e.preventDefault();
+    const index = this.keyboard.buttonsArr.findIndex(
+      (el) => el.data.code === e.code
+    );
+    if (index !== -1) {
+      this.keyboard.buttonsArr[index].button.classList.remove(
+        buttonStyles.active
+      );
+    }
+  };
 
   updateAreaValue = () => {
     const textAreaNode = this.textArea.container as HTMLTextAreaElement;
