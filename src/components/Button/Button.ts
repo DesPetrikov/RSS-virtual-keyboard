@@ -1,27 +1,18 @@
 import createHtml from '../../createHtml';
 import styles from './Button.module.css';
+import { dataType } from '../../commonTypes/dataType.types';
+import { wideButtons } from '../../data';
 
 export class Button {
   private parent: HTMLElement;
 
-  private content: string;
-
-  code: string;
-
-  private image: string;
-
   button: HTMLElement;
 
-  constructor(
-    parent: HTMLElement,
-    content: string,
-    code: string,
-    image?: string
-  ) {
+  data: dataType;
+
+  constructor(parent: HTMLElement, data: dataType) {
     this.parent = parent;
-    this.content = content;
-    this.code = code;
-    this.image = image;
+    this.data = data;
     this.creteButton();
   }
 
@@ -31,11 +22,17 @@ export class Button {
       styles.button,
       this.parent,
       '',
-      `data-code, ${this.code}`
+      `data-code, ${this.data.code}`
     );
-    this.button.innerHTML = this.content;
-    if (this.image) {
-      this.button.style.backgroundImage = `url(${this.image})`;
+    this.button.innerHTML = this.data.en.key;
+    if (this.data.image) {
+      this.button.style.backgroundImage = `url(${this.data.image})`;
+    }
+    if (wideButtons.includes(this.data.code)) {
+      this.button.classList.add(styles.wideButton);
+    }
+    if (this.data.code === 'Space') {
+      this.button.classList.add(styles.space);
     }
   }
 }

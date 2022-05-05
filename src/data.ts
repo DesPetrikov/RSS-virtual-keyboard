@@ -3,13 +3,7 @@ import capsLockSvg from './assets/svg/keyboard-capslock.svg';
 import enterSvg from './assets/svg/keyboard-return.svg';
 import spaceSvg from './assets/svg/keyboard-space-bar.svg';
 import languageSvg from './assets/svg/language.svg';
-
-type dataType = {
-  ru: { key: string; shift: string };
-  en: { key: string; shift: string };
-  code: string;
-  image?: string;
-};
+import { dataType } from './commonTypes/dataType.types';
 
 export const data: dataType[][] = [
   [
@@ -156,6 +150,11 @@ export const data: dataType[][] = [
       en: { key: '\\', shift: '|' },
       code: 'Backslash',
     },
+    {
+      ru: { key: 'Del', shift: 'Del' },
+      en: { key: 'Del', shift: 'Del' },
+      code: 'Delete',
+    },
   ],
   [
     {
@@ -283,14 +282,14 @@ export const data: dataType[][] = [
       code: 'Slash',
     },
     {
-      ru: { key: 'Shift', shift: 'Shift' },
-      en: { key: 'Shift', shift: 'Shift' },
-      code: 'ShiftRight',
-    },
-    {
       ru: { key: '▲', shift: '▲' },
       en: { key: '▲', shift: '▲' },
       code: 'ArrowUp',
+    },
+    {
+      ru: { key: 'Shift', shift: 'Shift' },
+      en: { key: 'Shift', shift: 'Shift' },
+      code: 'ShiftRight',
     },
   ],
   [
@@ -298,6 +297,12 @@ export const data: dataType[][] = [
       ru: { key: 'Ctrl', shift: 'Ctrl' },
       en: { key: 'Ctrl', shift: 'Ctrl' },
       code: 'ControlLeft',
+    },
+    {
+      ru: { key: '', shift: '' },
+      en: { key: '', shift: '' },
+      code: 'ChangeLang',
+      image: languageSvg,
     },
     {
       ru: { key: 'Alt', shift: 'Alt' },
@@ -335,12 +340,6 @@ export const data: dataType[][] = [
       en: { key: '►', shift: '►' },
       code: 'ArrowRight',
     },
-    {
-      ru: { key: '', shift: '' },
-      en: { key: '', shift: '' },
-      code: 'ChangeLang',
-      image: languageSvg,
-    },
   ],
 ];
 
@@ -348,6 +347,7 @@ export const serviceCodes = [
   'Backspace',
   'Tab',
   'CapsLock',
+  'Delete',
   'Enter',
   'ShiftLeft',
   'ShiftRight',
@@ -361,4 +361,12 @@ export const serviceCodes = [
   'ArrowDown',
   'ArrowRight',
   'ChangeLang',
+];
+
+export const wideButtons = [
+  'Backspace',
+  'CapsLock',
+  'Enter',
+  'ShiftLeft',
+  'ShiftRight',
 ];

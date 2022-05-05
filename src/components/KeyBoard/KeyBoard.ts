@@ -20,12 +20,7 @@ export class Keyboard {
     data.forEach((row) => {
       const rowContainer = createHtml('div', styles.row, this.container);
       row.forEach((el) => {
-        let button;
-        if (el.image) {
-          button = new Button(rowContainer, el.en.key, el.code, el.image);
-        } else {
-          button = new Button(rowContainer, el.en.key, el.code);
-        }
+        const button = new Button(rowContainer, el);
         this.buttonsArr.push(button);
       });
     });

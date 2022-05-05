@@ -25,17 +25,28 @@ export class Main {
     this.textArea = new TextArea(container);
     this.keyboard = new Keyboard(container);
 
-    this.keyboard.container.addEventListener('click', this.buttonClickHandler);
+    this.keyboard.container.addEventListener(
+      'mousedown',
+      this.mouseDownHandler
+    );
+    this.keyboard.container.addEventListener('mouseup', this.mouseUpHandler);
     document.addEventListener('keydown', this.keyDownHandler);
   }
 
-  buttonClickHandler = (e: Event) => {
+  mouseDownHandler = (e: Event) => {
     if (e.target instanceof HTMLButtonElement) {
       const dataCode = e.target.dataset.code;
       if (!serviceCodes.includes(dataCode)) {
         this.areaValue += e.target.innerText;
       }
       this.updateAreaValue();
+      e.target.classList.add(buttonStyles.active);
+    }
+  };
+
+  mouseUpHandler = (e: Event) => {
+    if (e.target instanceof HTMLButtonElement) {
+      e.target.classList.remove(buttonStyles.active);
     }
   };
 
@@ -47,16 +58,14 @@ export class Main {
     this.updateAreaValue();
 
     const index = this.keyboard.buttonsArr.findIndex(
-      (el) => el.code === e.code
+      (el) => el.data.code === e.code
     );
     if (index !== -1) {
       this.keyboard.buttonsArr[index].button.classList.add(buttonStyles.active);
     }
   };
 
-  keyUpHandler = () => {
-	  
-  }
+  keyUpHandler = () => {};
 
   updateAreaValue = () => {
     const textAreaNode = this.textArea.container as HTMLTextAreaElement;

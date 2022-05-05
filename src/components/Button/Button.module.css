@@ -5,6 +5,12 @@
 	background-repeat: no-repeat;
 	background-position: center center;
 }
+.wideButton {
+	width: 100px;
+}
+.space {
+	width: 250px;
+}
 .active {
 	background-color: red;
 }
