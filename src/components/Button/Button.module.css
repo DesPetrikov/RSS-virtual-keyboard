@@ -14,3 +14,9 @@
 .active {
 	background-color: red;
 }
+.capsLock {
+	background-color: green;
+}
+.shift {
+	background-color: aqua;
+}

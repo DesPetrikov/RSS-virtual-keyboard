@@ -2,6 +2,7 @@ import createHtml from '../../createHtml';
 import styles from './Button.module.css';
 import { dataType } from '../../commonTypes/dataType.types';
 import { wideButtons } from '../../data';
+import { languageType } from '../../commonTypes/language.types';
 
 export class Button {
   private parent: HTMLElement;
@@ -10,9 +11,12 @@ export class Button {
 
   data: dataType;
 
-  constructor(parent: HTMLElement, data: dataType) {
+  language: languageType;
+
+  constructor(parent: HTMLElement, data: dataType, language: languageType) {
     this.parent = parent;
     this.data = data;
+    this.language = language;
     this.creteButton();
   }
 
@@ -24,7 +28,7 @@ export class Button {
       '',
       `data-code, ${this.data.code}`
     );
-    this.button.innerHTML = this.data.en.key;
+    this.button.innerHTML = this.data[this.language].key;
     if (this.data.image) {
       this.button.style.backgroundImage = `url(${this.data.image})`;
     }

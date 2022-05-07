@@ -5,9 +5,12 @@ import { serviceCodes } from '../../data';
 import styles from './Main.module.css';
 import buttonStyles from '../Button/Button.module.css';
 import { Button } from '../Button/Button';
+import { languageType } from '../../commonTypes/language.types';
 
 export class Main {
   private parent: HTMLElement;
+
+  container: HTMLElement;
 
   textArea: TextArea;
 
@@ -15,15 +18,24 @@ export class Main {
 
   areaValue: string = '';
 
+  capsLock: Boolean = false;
+
+  shift: Boolean = false;
+
+  language: languageType;
+
+  private targetButton: Button;
+
   constructor(parent: HTMLElement) {
     this.parent = parent;
+    this.getLanguage();
     this.createMain();
   }
 
   createMain() {
-    const container = createHtml('main', styles.main, this.parent);
-    this.textArea = new TextArea(container);
-    this.keyboard = new Keyboard(container);
+    this.container = createHtml('main', styles.main, this.parent);
+    this.textArea = new TextArea(this.container);
+    this.keyboard = new Keyboard(this.container, this.language);
 
     this.keyboard.container.addEventListener(
       'mousedown',
@@ -37,17 +49,18 @@ export class Main {
   mouseDownHandler = (e: Event) => {
     if (e.target instanceof HTMLButtonElement) {
       const dataCode = e.target.dataset.code;
-      if (!serviceCodes.includes(dataCode)) {
-        this.areaValue += e.target.innerText;
-      }
+      this.targetButton = this.keyboard.buttonsArr.find(
+        (el) => el.data.code === dataCode
+      );
       this.updateAreaValue();
-      e.target.classList.add(buttonStyles.active);
+      this.targetButton.button.classList.add(buttonStyles.active);
+      this.serviceButtonsHandler(this.targetButton);
     }
   };
 
   mouseUpHandler = (e: Event) => {
     if (e.target instanceof HTMLButtonElement) {
-      e.target.classList.remove(buttonStyles.active);
+      this.targetButton.button.classList.remove(buttonStyles.active);
     }
   };
 
@@ -61,6 +74,7 @@ export class Main {
     );
     if (index !== -1) {
       this.keyboard.buttonsArr[index].button.classList.add(buttonStyles.active);
+      this.serviceButtonsHandler(this.keyboard.buttonsArr[index]);
     }
     this.updateAreaValue();
   };
@@ -76,6 +90,62 @@ export class Main {
       );
     }
   };
+
+  serviceButtonsHandler = (currentButton: Button) => {
+    switch (currentButton.data.code) {
+      case 'CapsLock':
+        this.capsLock = !this.capsLock;
+        currentButton.button.classList.toggle(buttonStyles.capsLock);
+        this.keyboard.typingButtons.forEach((el) => {
+          //  if (this.capsLock && !this.shift) {
+          //    el.button.innerText = el.button.innerText.toUpperCase();
+          //  } else {
+          //    el.button.innerText = el.button.innerText.toLowerCase();
+          //  }
+        });
+        break;
+      case 'ShiftLeft':
+      case 'ShiftRight':
+        this.shift = !this.shift;
+        currentButton.button.classList.toggle(buttonStyles.shift);
+        this.keyboard.typingButtons.forEach((el) => {
+          //  if (this.shift && !this.capsLock) {
+          //    el.button.innerText = el.data.en.shift;
+          //  } else if (this.shift && this.capsLock) {
+          //    el.button.innerText = el.data.en.key;
+          //  }
+        });
+        break;
+      case 'ChangeLang':
+        if (localStorage.getItem('language') === 'en') {
+          localStorage.setItem('language', 'ru');
+        } else {
+          localStorage.setItem('language', 'en');
+        }
+        this.language = localStorage.getItem('language') as languageType;
+        this.keyboard.container.remove();
+        this.keyboard = new Keyboard(this.container, this.language);
+        this.keyboard.container.addEventListener(
+          'mousedown',
+          this.mouseDownHandler
+        );
+        this.keyboard.container.addEventListener(
+          'mouseup',
+          this.mouseUpHandler
+        );
+        break;
+      default:
+        //   this.areaValue += currentButton.button.innerText;
+        break;
+    }
+  };
+
+  getLanguage() {
+    if (!localStorage.getItem('language')) {
+      localStorage.setItem('language', 'en');
+    }
+    this.language = localStorage.getItem('language') as languageType;
+  }
 
   updateAreaValue = () => {
     const textAreaNode = this.textArea.container as HTMLTextAreaElement;
