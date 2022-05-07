@@ -4,7 +4,7 @@ import styles from './TextArea.moodule.css';
 export class TextArea {
   private parent: HTMLElement;
 
-  container: HTMLElement;
+  container: HTMLTextAreaElement;
 
   constructor(parent: HTMLElement) {
     this.parent = parent;
@@ -18,6 +18,6 @@ export class TextArea {
       this.parent,
       '',
       'autofocus, true'
-    );
+    ) as HTMLTextAreaElement;
   }
 }
