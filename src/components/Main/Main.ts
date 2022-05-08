@@ -239,12 +239,55 @@ export class Main {
         );
         break;
       case 'ArrowUp':
-        //   this.textArea.container.setRangeText(
-        //     rightLetter,
-        //     cursorPositionStart,
-        //     cursorPositionEnd + 1,
-        //     'end'
-        //   );
+        let toLeftCounter = 0;
+        let upFlag = false;
+
+        for (let i = cursorPositionStart; i >= 0; i -= 1) {
+          if (
+            this.textArea.container.value[i] === '\n' &&
+            i !== cursorPositionStart
+          ) {
+            upFlag = true;
+            break;
+          }
+          toLeftCounter += 1;
+        }
+        if (upFlag) {
+          this.textArea.container.setRangeText(
+            this.textArea.container.value.slice(
+              cursorPositionStart - toLeftCounter,
+              cursorPositionStart
+            ),
+            cursorPositionStart - toLeftCounter,
+            cursorPositionStart,
+            'start'
+          );
+        }
+
+        break;
+      case 'ArrowDown':
+        let toRightCounter = 0;
+        let rows = 0;
+        for (
+          let i = cursorPositionEnd;
+          i < this.textArea.container.value.length;
+          i += 1
+        ) {
+          if (this.textArea.container.value[i] === '\n') {
+            rows += 1;
+            if (rows === 2) break;
+          }
+          toRightCounter += 1;
+        }
+        this.textArea.container.setRangeText(
+          this.textArea.container.value.slice(
+            cursorPositionEnd,
+            cursorPositionEnd + toRightCounter
+          ),
+          cursorPositionEnd,
+          cursorPositionEnd + toRightCounter,
+          'end'
+        );
         break;
       case 'AltLeft':
       case 'AltRight':
