@@ -11,8 +11,8 @@ export default function createHtml(
 
   if (elem instanceof HTMLImageElement) elem.src = src;
 
-  if (elem instanceof HTMLAnchorElement) elem.href = src;
-
+  if (elem instanceof HTMLAnchorElement || elem instanceof HTMLLinkElement)
+    elem.href = src;
   if (attributes.length !== 0)
     attributes.forEach((el) => {
       const [attr, value] = [...el.split(', ')];

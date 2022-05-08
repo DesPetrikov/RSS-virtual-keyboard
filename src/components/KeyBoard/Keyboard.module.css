@@ -1,12 +1,29 @@
 .keyboard {
   height: 300px;
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
-  padding: 10px;
-  background-color: burlywood;
+  padding: 20px 0px 20px 0px;
+  background: -webkit-linear-gradient(
+    90deg,
+    #000000,
+    #230b10,
+    #331016,
+    #230b10,
+    #000000
+  );
+  background: linear-gradient(
+    90deg,
+    #000000,
+    #230b10,
+    #331016,
+    #230b10,
+    #000000
+  );
+  background-color: black;
+  border-radius: 10px;
 }
 
 .row {
-	display: flex;
+  display: flex;
   justify-content: center;
 }

@@ -1,5 +1,6 @@
 import createHtml from '../../createHtml';
 import styles from './Header.module.css';
+import languageSvg from '../../assets/svg/language.svg';
 
 export class Header {
   private parent: HTMLElement;
@@ -11,16 +12,20 @@ export class Header {
 
   createHeader() {
     const listsContent = [
-      'Made for Windows',
-      `To switch language press <b>left shift + alt</b>`,
+      'Designed for Windows',
+      `To switch the language press/click <b>left shift + ctrl</b> or click `,
     ];
     const container = createHtml('header', styles.header, this.parent);
     const title = createHtml('h1', styles.title, container);
-    title.innerText = 'RSS Virtual Keyboard';
+    title.innerText = 'Virtual Keyboard';
     const ul = createHtml('ul', styles.lists, container);
-    listsContent.forEach((el) => {
+    listsContent.forEach((el, idx) => {
       const list = createHtml('li', styles.list, ul);
       list.innerHTML = el;
+      if (idx === 1) {
+        const icon = createHtml('div', styles.icon, list);
+        icon.style.webkitMaskImage = `url(${languageSvg})`;
+      }
     });
   }
 }

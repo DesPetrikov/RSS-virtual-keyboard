@@ -1,5 +1,4 @@
 import backspaceSvg from './assets/svg/keyboard-delete.svg';
-import capsLockSvg from './assets/svg/keyboard-capslock.svg';
 import enterSvg from './assets/svg/keyboard-return.svg';
 import spaceSvg from './assets/svg/keyboard-space-bar.svg';
 import languageSvg from './assets/svg/language.svg';
@@ -158,10 +157,9 @@ export const data: dataType[][] = [
   ],
   [
     {
-      ru: { key: '', shift: '' },
-      en: { key: '', shift: '' },
+      ru: { key: 'Caps Lock', shift: 'Caps Lock' },
+      en: { key: 'Caps Lock', shift: 'Caps Lock' },
       code: 'CapsLock',
-      image: capsLockSvg,
     },
     {
       ru: { key: 'ф', shift: 'Ф' },

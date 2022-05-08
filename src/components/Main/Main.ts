@@ -1,7 +1,6 @@
 import createHtml from '../../createHtml';
 import { TextArea } from '../TextArea/TextArea';
 import { Keyboard } from '../Keyboard/Keyboard';
-import { serviceCodes } from '../../data';
 import styles from './Main.module.css';
 import buttonStyles from '../Button/Button.module.css';
 import { Button } from '../Button/Button';
@@ -16,11 +15,9 @@ export class Main {
 
   keyboard: Keyboard;
 
-  areaValue: string = '';
+  private capsLock: Boolean = false;
 
-  capsLock: Boolean = false;
-
-  shift: Boolean = false;
+  private shift: Boolean = false;
 
   leftShiftElement: Button;
 
@@ -263,7 +260,6 @@ export class Main {
             'start'
           );
         }
-
         break;
       case 'ArrowDown':
         let toRightCounter = 0;
