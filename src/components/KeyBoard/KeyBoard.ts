@@ -4,7 +4,6 @@ import { data, serviceCodes } from '../../data';
 import styles from './Keyboard.module.css';
 import { languageType } from '../../commonTypes/language.types';
 
-
 export class Keyboard {
   private parent: HTMLElement;
 

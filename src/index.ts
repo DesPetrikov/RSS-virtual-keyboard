@@ -14,17 +14,7 @@ class Page {
     const main = new Main(this.root);
     const footer = new Footer(this.root);
   }
-
-  createIcon() {
-    const icon = createHtml(
-      'link',
-      'icon',
-      document.head,
-      iconSvg,
-      'rel, icon'
-    );
-  }
 }
+createHtml('link', 'icon', document.head, iconSvg, 'rel, icon');
 const page = new Page();
-page.createIcon();
 page.createPage();

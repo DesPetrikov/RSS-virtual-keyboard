@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import createHtml from '../../createHtml';
 import { TextArea } from '../TextArea/TextArea';
 import { Keyboard } from '../Keyboard/Keyboard';
@@ -49,17 +50,19 @@ export class Main {
   mouseDownHandler = (e: Event) => {
     if (e.target instanceof HTMLButtonElement) {
       const dataCode = e.target.dataset.code;
-      this.targetButton = this.keyboard.buttonsArr.find(
-        (el) => el.data.code === dataCode
-      );
-      this.targetButton.button.classList.add(buttonStyles.active);
-      this.serviceButtonsHandler(this.targetButton);
+      if (dataCode) {
+        this.targetButton = this.keyboard.buttonsArr.find(
+          (el) => el.data.code === dataCode
+        );
+        this.targetButton.button.classList.add(buttonStyles.active);
+        this.serviceButtonsHandler(this.targetButton);
+      }
     }
   };
 
   mouseUpHandler = (e: Event) => {
     if (e.target instanceof HTMLButtonElement) {
-      this.targetButton.button.classList.remove(buttonStyles.active);
+      this.targetButton?.button.classList.remove(buttonStyles.active);
       this.textArea.container.focus();
     }
   };
