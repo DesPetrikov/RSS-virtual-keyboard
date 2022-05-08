@@ -22,6 +22,10 @@ export class Main {
 
   shift: Boolean = false;
 
+  leftShiftElement: Button;
+
+  rightShiftElement: Button;
+
   language: languageType;
 
   private targetButton: Button;
@@ -64,16 +68,13 @@ export class Main {
   };
 
   keyDownHandler = (e: KeyboardEvent) => {
-    //  e.preventDefault();
-    //  if (!serviceCodes.includes(e.code)) {
-    //    this.areaValue += e.key;
-    //  }
+    e.preventDefault();
     const index = this.keyboard.buttonsArr.findIndex(
       (el) => el.data.code === e.code
     );
     if (index !== -1) {
       this.keyboard.buttonsArr[index].button.classList.add(buttonStyles.active);
-      // this.serviceButtonsHandler(this.keyboard.buttonsArr[index]);
+      this.serviceButtonsHandler(this.keyboard.buttonsArr[index]);
     }
   };
 
@@ -90,28 +91,92 @@ export class Main {
   };
 
   serviceButtonsHandler = (currentButton: Button) => {
-    //  this.areaValue = this.textArea.container.value;
+    const {
+      data: { code },
+    } = currentButton;
     const cursorPositionStart = this.textArea.container.selectionStart;
     const cursorPositionEnd = this.textArea.container.selectionEnd;
+    const leftLetter = this.textArea.container.value.slice(
+      cursorPositionStart - 1,
+      cursorPositionStart
+    );
+    const rightLetter = this.textArea.container.value.slice(
+      cursorPositionStart,
+      cursorPositionEnd + 1
+    );
+    const rerenderKeyboard = () => {
+      if (localStorage.getItem('language') === 'en') {
+        localStorage.setItem('language', 'ru');
+      } else {
+        localStorage.setItem('language', 'en');
+      }
+      this.language = localStorage.getItem('language') as languageType;
+      this.keyboard.container.remove();
+      this.keyboard = new Keyboard(this.container, this.language);
+      this.keyboard.container.addEventListener(
+        'mousedown',
+        this.mouseDownHandler
+      );
+      this.keyboard.container.addEventListener('mouseup', this.mouseUpHandler);
+      this.capsLock = false;
+      this.shift = false;
+    };
 
-    switch (currentButton.data.code) {
+    const shiftHandler = () => {
+      this.shift = !this.shift;
+      if (this.shift) {
+        this.keyboard.typingButtons.forEach((el) => {
+          el.button.innerText = this.capsLock
+            ? el.data[this.language].shift.toLowerCase()
+            : el.data[this.language].shift.toUpperCase();
+        });
+      } else {
+        this.keyboard.typingButtons.forEach((el) => {
+          el.button.innerText = this.capsLock
+            ? el.data[this.language].key.toUpperCase()
+            : el.data[this.language].key.toLowerCase();
+        });
+      }
+    };
+
+    switch (code) {
       case 'ChangeLang':
-        if (localStorage.getItem('language') === 'en') {
-          localStorage.setItem('language', 'ru');
-        } else {
-          localStorage.setItem('language', 'en');
+        rerenderKeyboard();
+        break;
+      case 'ShiftLeft':
+        this.leftShiftElement = currentButton;
+        this.leftShiftElement.button.classList.toggle(buttonStyles.shift);
+        shiftHandler();
+        break;
+      case 'ShiftRight':
+        this.rightShiftElement = currentButton;
+        this.rightShiftElement.button.classList.toggle(buttonStyles.shift);
+        shiftHandler();
+        break;
+      case 'ControlLeft':
+        if (this.shift) {
+          this.shift = false;
+          this.leftShiftElement?.button.classList.remove(buttonStyles.shift);
+          this.rightShiftElement?.button.classList.remove(buttonStyles.shift);
+          rerenderKeyboard();
         }
-        this.language = localStorage.getItem('language') as languageType;
-        this.keyboard.container.remove();
-        this.keyboard = new Keyboard(this.container, this.language);
-        this.keyboard.container.addEventListener(
-          'mousedown',
-          this.mouseDownHandler
-        );
-        this.keyboard.container.addEventListener(
-          'mouseup',
-          this.mouseUpHandler
-        );
+        break;
+      case 'CapsLock':
+        this.capsLock = !this.capsLock;
+        currentButton.button.classList.toggle(buttonStyles.capsLock);
+        if (this.capsLock) {
+          this.keyboard.typingButtons.forEach((el) => {
+            el.button.innerText = this.shift
+              ? el.button.innerText.toLowerCase()
+              : el.button.innerText.toUpperCase();
+          });
+        } else {
+          this.keyboard.typingButtons.forEach((el) => {
+            el.button.innerText = this.shift
+              ? el.button.innerText.toUpperCase()
+              : el.button.innerText.toLowerCase();
+          });
+        }
         break;
       case 'Enter':
         this.textArea.container.setRangeText(
@@ -157,7 +222,35 @@ export class Main {
           'end'
         );
         break;
-		 
+      case 'ArrowLeft':
+        this.textArea.container.setRangeText(
+          leftLetter,
+          cursorPositionStart ? cursorPositionStart - 1 : cursorPositionStart,
+          cursorPositionEnd,
+          'start'
+        );
+        break;
+      case 'ArrowRight':
+        this.textArea.container.setRangeText(
+          rightLetter,
+          cursorPositionStart,
+          cursorPositionEnd + 1,
+          'end'
+        );
+        break;
+      case 'ArrowUp':
+        //   this.textArea.container.setRangeText(
+        //     rightLetter,
+        //     cursorPositionStart,
+        //     cursorPositionEnd + 1,
+        //     'end'
+        //   );
+        break;
+      case 'AltLeft':
+      case 'AltRight':
+      case 'ControlRight':
+        break;
+
       default:
         this.textArea.container.setRangeText(
           currentButton.button.innerText,
