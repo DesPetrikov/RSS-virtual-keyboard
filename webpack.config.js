@@ -8,17 +8,11 @@ const isProduction = process.env.NODE_ENV === 'production';
 const stylesHandler = 'style-loader';
 
 const config = {
-  entry: './src/index.ts',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
     clean: true,
-  },
-  optimization: {
-    chunkIds: false,
-    concatenateModules: false,
-    minimize: false,
-
   },
   devServer: {
     open: true,
@@ -36,8 +30,8 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/i,
-        loader: 'ts-loader',
+        test: /\.(js|jsx)$/i,
+        loader: 'babel-loader',
         exclude: ['/node_modules/'],
       },
       {
@@ -85,7 +79,7 @@ const config = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.tsx'],
   },
 };
 
