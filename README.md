@@ -1,1 +1,1 @@
-[rss-virtual-keyboard](https://despetrikov.github.io/RSS-virtual-keyboard/dist)
+[rss-virtual-keyboard](https://despetrikov.github.io/RSS-virtual-keyboard/)
