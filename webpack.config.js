@@ -14,6 +14,12 @@ const config = {
     filename: '[name].bundle.js',
     clean: true,
   },
+  optimization: {
+    chunkIds: false,
+    concatenateModules: false,
+    minimize: false,
+
+  },
   devServer: {
     open: true,
     host: 'localhost',
